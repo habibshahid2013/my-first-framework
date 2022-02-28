@@ -8,6 +8,8 @@ import org.testng.annotations.BeforeTest;
 
 import java.util.concurrent.TimeUnit;
 
+import static SeleniumTest.testframework.DriverFactory.getChromeDriver;
+
 public class BaseTestClass {
 
     public static final String Base_URL = "https://github.com/";
@@ -15,11 +17,8 @@ public class BaseTestClass {
 
     @BeforeTest //@BeforeEach in Junit
     static void setup(){
+        driver = getChromeDriver();
         //Create the driver Object
-        System.setProperty("webdriver.chrome.driver", "/Users/hshahid/Documents/chromedriver 8");
-        ChromeOptions options = new ChromeOptions().addArguments("start-fullscreen");
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     @AfterTest
