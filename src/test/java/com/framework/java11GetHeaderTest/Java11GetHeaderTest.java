@@ -9,6 +9,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
+import static org.testng.Assert.assertEquals;
+
 public class Java11GetHeaderTest {
 
     private static final String BASE_URL = "https://api.github.com/";
@@ -30,7 +32,7 @@ public class Java11GetHeaderTest {
         int actualCode = response.statusCode();
 
         //Assert
-        Assert.assertEquals(actualCode, 200);
+        assertEquals(actualCode, 200);
 
     }
 
@@ -49,7 +51,7 @@ public class Java11GetHeaderTest {
             HttpResponse<Void> response =  httpClient.send(get, HttpResponse.BodyHandlers.discarding());
             String contentType = response.headers().firstValue("content-type").get();
 
-            Assert.assertEquals(contentType, "application/json; charset= utf-8");
+            Assert.assertEquals(contentType, "application/json; charset=utf-8");
 
     }
 
@@ -66,6 +68,6 @@ public class Java11GetHeaderTest {
         //ACT
         HttpResponse<Void> response = httpClient.send(get, HttpResponse.BodyHandlers.discarding());
         String xRateLimit = response.headers().firstValue("X-Ratelimit-Limit").get();
-        Assert.assertEquals(Integer.parseInt(xRateLimit), 60);
+        assertEquals(Integer.parseInt(xRateLimit), 60);
     }
 }
